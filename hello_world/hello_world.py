@@ -4,11 +4,10 @@ import depthai as dai
 # Define pipeline
 pipeline = dai.Pipeline()
 
-# Define source - color camera
+# Define source - mono camera
 mono = pipeline.createMonoCamera()
 mono.setFps(40)
 mono.setBoardSocket(dai.CameraBoardSocket.CAM_B)
-
 
 # Create output
 xout = pipeline.createXLinkOut()
@@ -17,8 +16,6 @@ mono.out.link(xout.input)
 
 # Pipeline defined, now the device connection
 with dai.Device(pipeline) as device:
-    # Start pipeline
-    device.startPipeline()
 
     # Output queue will be used to get the frames from the output defined above
     queue_mono = device.getOutputQueue(name="left_camera", maxSize=4, blocking=False)
