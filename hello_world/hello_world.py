@@ -32,7 +32,8 @@ with dai.Device(pipeline) as device:
             cv2.imshow("preview", frame)
 
         if cv2.waitKey(1) == ord('q'):
-            print('Key Q pressed')
+            print('Key "q" pressed')
+            cv2.destroyAllWindows()
             break
 
 print('******* End of program ********')
