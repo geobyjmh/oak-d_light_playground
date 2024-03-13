@@ -1,5 +1,3 @@
-#This initial file is a copy of the hello_world file tagged hello_world_complete.
-
 import cv2
 import depthai as dai
 
