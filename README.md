@@ -12,4 +12,4 @@ This code serves as a basic framework for capturing and displaying monocular cam
 
 ## two_cameras
 
-in progress
+This builds on "hello_world" to display frames from both the left and the right cameras.
