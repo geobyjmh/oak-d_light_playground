@@ -62,6 +62,7 @@ with dai.Device(pipeline) as device:
             # Handle mono_left frame (e.g., display it).
             frame_disparity = in_disparity.getCvFrame()
             frame_disparity = (frame_disparity * disparityMultiplier).astype(np.uint8)
+            frame_disparity = cv2.applyColorMap(frame_disparity, cv2.COLORMAP_JET)
             
             frame_left = in_mono_left.getCvFrame()
             frame_right = in_mono_right.getCvFrame()
