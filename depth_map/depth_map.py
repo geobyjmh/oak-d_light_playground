@@ -1,5 +1,6 @@
 import cv2
 import depthai as dai
+import numpy as np
 
 # Define pipeline
 pipeline = dai.Pipeline()
@@ -50,6 +51,8 @@ with dai.Device(pipeline) as device:
     queue_mono_left = device.getOutputQueue(name="RectifiedLeft", maxSize=1, blocking=False)
     queue_mono_right = device.getOutputQueue(name="RectifiedRight", maxSize=1, blocking=False)
 
+    disparityMultiplier = 255 / stereo.initialConfig.getMaxDisparity()
+    
     while True:
         in_disparity = queue_disparity.get()
         in_mono_left = queue_mono_left.get()
@@ -58,6 +61,8 @@ with dai.Device(pipeline) as device:
         if in_mono_left is not None:
             # Handle mono_left frame (e.g., display it).
             frame_disparity = in_disparity.getCvFrame()
+            frame_disparity = (frame_disparity * disparityMultiplier).astype(np.uint8)
+            
             frame_left = in_mono_left.getCvFrame()
             frame_right = in_mono_right.getCvFrame()
             # ... (image processing or display)
