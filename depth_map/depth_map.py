@@ -5,27 +5,18 @@ import numpy as np
 # Define pipeline
 pipeline = dai.Pipeline()
 
+stereo = pipeline.createStereoDepth()
+stereo.setLeftRightCheck(True)
+
 # Define source - mono_left camera
 mono_left = pipeline.createMonoCamera()
 mono_left.setFps(40)
 mono_left.setBoardSocket(dai.CameraBoardSocket.CAM_B)
+mono_left.out.link(stereo.left)
 
 mono_right = pipeline.createMonoCamera()
 mono_right.setFps(40)
 mono_right.setBoardSocket(dai.CameraBoardSocket.CAM_C)
-
-stereo = pipeline.createStereoDepth()
-stereo.setLeftRightCheck(True)
-
-# Create output
-#xout_left = pipeline.createXLinkOut()
-#xout_left.setStreamName("left_camera")
-#mono_left.out.link(xout_left.input)
-mono_left.out.link(stereo.left)
-
-#xout_right = pipeline.createXLinkOut()
-#xout_right.setStreamName("right_camera")
-#mono_right.out.link(xout_right.input)
 mono_right.out.link(stereo.right)
 
 #create disparity output
