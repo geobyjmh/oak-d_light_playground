@@ -57,10 +57,14 @@ with dai.Device(pipeline) as device:
             
             frame_left = in_mono_left.getCvFrame()
             frame_right = in_mono_right.getCvFrame()
+            frame_left_right = np.uint8(frame_left/2 + frame_right/2)
+            
             # ... (image processing or display)
+            
             cv2.imshow("left (cam_b)", frame_left)
             cv2.imshow("right (cam_c)", frame_right)
             cv2.imshow("disparity", frame_disparity)
+            cv2.imshow("Both left and right", frame_left_right) 
 
         if cv2.waitKey(1) == ord('q'):
             print('Key "q" pressed')
