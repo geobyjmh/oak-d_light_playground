@@ -12,8 +12,12 @@ This code serves as a basic framework for capturing and displaying monocular cam
 
 ## two_cameras
 
-This builds on "hello_world" to display frames from both the left and the right cameras.
+This builds on "hello_world" to display frames from both the left and the right cameras. The code also displays a third frame which combines the left and right frames, so you can clearly see the offset between the two images.
 
 ## depth_map
 
-current activity
+This code instead of just displaying the left and right cameras passes them both through the StereoDepth module first. This still allows us to display the “rectifiedLeft” and “rectifiedRight” images from the cameras. This StereoDepth module will also allow us to access the “disparity” or offset between the two images. The code uses this disparity to create a depth map showing the distance of the object in view.
+
+## colour_camera
+
+This code just displays the frames from the colour camera. 
