@@ -1,38 +1,10 @@
 import cv2
 import depthai as dai
 import numpy as np
+from define_oakd_pipeline_nodes import define_pipeline
 
-# Define pipeline
-pipeline = dai.Pipeline()
-
-stereo = pipeline.createStereoDepth()
-stereo.setLeftRightCheck(True)
-
-# Define source - mono_left camera
-mono_left = pipeline.createMonoCamera()
-mono_left.setFps(40)
-mono_left.setBoardSocket(dai.CameraBoardSocket.CAM_B)
-mono_left.out.link(stereo.left)
-
-mono_right = pipeline.createMonoCamera()
-mono_right.setFps(40)
-mono_right.setBoardSocket(dai.CameraBoardSocket.CAM_C)
-mono_right.out.link(stereo.right)
-
-#create disparity output
-xoutDisp = pipeline.createXLinkOut()
-xoutDisp.setStreamName("disparity")
-stereo.disparity.link(xoutDisp.input)
-
-#create left output
-xoutRectifiedLeft = pipeline.createXLinkOut()
-xoutRectifiedLeft.setStreamName("RectifiedLeft")
-stereo.rectifiedLeft.link(xoutRectifiedLeft.input)
-
-#create right output
-xoutRectifiedRight = pipeline.createXLinkOut()
-xoutRectifiedRight.setStreamName("RectifiedRight")
-stereo.rectifiedRight.link(xoutRectifiedRight.input)
+dp = define_pipeline()
+pipeline = dp.getPipeline()
 
 # Pipeline defined, now the device connection
 with dai.Device(pipeline) as device:
@@ -42,7 +14,7 @@ with dai.Device(pipeline) as device:
     queue_mono_left = device.getOutputQueue(name="RectifiedLeft", maxSize=1, blocking=False)
     queue_mono_right = device.getOutputQueue(name="RectifiedRight", maxSize=1, blocking=False)
 
-    disparityMultiplier = 255 / stereo.initialConfig.getMaxDisparity()
+    disparityMultiplier = dp.getDisparityMultiplier()
     
     while True:
         in_disparity = queue_disparity.get()
