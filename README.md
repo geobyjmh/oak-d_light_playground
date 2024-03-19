@@ -21,3 +21,7 @@ This code instead of just displaying the left and right cameras passes them both
 ## colour_camera
 
 This code just displays the frames from the colour camera. 
+
+## opencv_threshold
+
+In progress - Code based on depth_map
