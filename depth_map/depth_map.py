@@ -12,11 +12,13 @@ stereo.setLeftRightCheck(True)
 mono_left = pipeline.createMonoCamera()
 mono_left.setFps(40)
 mono_left.setBoardSocket(dai.CameraBoardSocket.CAM_B)
+mono_left.setResolution(dai.MonoCameraProperties.SensorResolution.THE_480_P)
 mono_left.out.link(stereo.left)
 
 mono_right = pipeline.createMonoCamera()
 mono_right.setFps(40)
 mono_right.setBoardSocket(dai.CameraBoardSocket.CAM_C)
+mono_right.setResolution(dai.MonoCameraProperties.SensorResolution.THE_480_P)
 mono_right.out.link(stereo.right)
 
 #create disparity output
