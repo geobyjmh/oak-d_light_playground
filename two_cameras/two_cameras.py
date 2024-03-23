@@ -8,10 +8,12 @@ pipeline = dai.Pipeline()
 # Define source - mono_left camera
 mono_left = pipeline.createMonoCamera()
 mono_left.setFps(40)
+mono_left.setResolution(dai.MonoCameraProperties.SensorResolution.THE_480_P)
 mono_left.setBoardSocket(dai.CameraBoardSocket.CAM_B)
 
 mono_right = pipeline.createMonoCamera()
 mono_right.setFps(40)
+mono_right.setResolution(dai.MonoCameraProperties.SensorResolution.THE_480_P)
 mono_right.setBoardSocket(dai.CameraBoardSocket.CAM_C)
 
 # Create output
