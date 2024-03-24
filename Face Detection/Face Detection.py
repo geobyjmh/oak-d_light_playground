@@ -44,9 +44,13 @@ def main():
                 canny_left = cv2.Canny(frame_left, 125,125)
                 cv2.imshow("Canny", canny_left)
 
-                frame_disparity_gray = cv2.cvtColor(frame_disparity, cv2.COLOR_BGR2GRAY)
-                ret, thresh_disp = cv2.threshold(frame_disparity_gray, 125,255, cv2.THRESH_BINARY)
-                cv2.imshow("Threshold disp", thresh_disp)
+                haar_cascade = cv2.CascadeClassifier('Face Detection/haar_face.xml')
+                faces_rect = haar_cascade.detectMultiScale(frame_left, scaleFactor=1.1, minNeighbors=5, minSize=(10, 10))
+                frame_left =cv2.cvtColor(frame_left,cv2.COLOR_GRAY2BGR)
+                for (x, y, w, h) in faces_rect:
+                    cv2.rectangle(frame_left, (x, y), (x+w, y+h), (0, 255, 0), 2)
+
+                cv2.imshow('Face Detection', frame_left)
                 
             if cv2.waitKey(1) == ord('q'):
                 print('Key "q" pressed')

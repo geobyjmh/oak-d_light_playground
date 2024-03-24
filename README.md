@@ -27,3 +27,8 @@ This code just displays the frames from the colour camera.
 This Python code utilizes the OpenCV library and the DepthAI library to capture and process stereo images from an Oak-D camera. It defines a function getDisparityFrame() to generate a disparity map from the stereo images. The main() function sets up the pipeline for processing stereo images, retrieves frames from the camera, and displays various visualizations such as the left and right stereo images, the combined stereo image, and the disparity map. 
 
 Additionally, it performs edge detection using the Canny algorithm on the left stereo image and applies thresholding on the disparity map. The program continuously loops until the user presses the 'q' key to exit, at which point it cleans up and terminates. This code is structured to execute the main() function when the script is run directly.
+
+## Face Detection
+
+this is what I am currently working on.
+https://github.com/opencv/opencv/tree/master/data/haarcascades
