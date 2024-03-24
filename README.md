@@ -30,5 +30,4 @@ Additionally, it performs edge detection using the Canny algorithm on the left s
 
 ## Face Detection
 
-this is what I am currently working on.
-https://github.com/opencv/opencv/tree/master/data/haarcascades
+This code employs the Haar cascade technique for face detection, utilizing an XML file downloaded from the official OpenCV repository: https://github.com/opencv/opencv/tree/master/data/haarcascades. Haar cascades are efficient classifiers used in object detection tasks, particularly well-suited for detecting faces in images or video streams. By leveraging machine learning algorithms, Haar cascades analyze features such as edges, lines, and textures to identify objects of interest within an image. This XML file contains pre-trained data necessary for the cascade classifier to recognize facial features accurately, enabling the code to detect faces reliably within the provided images or video frames.
