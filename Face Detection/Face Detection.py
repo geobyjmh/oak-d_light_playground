@@ -49,7 +49,9 @@ def main():
                 frame_left =cv2.cvtColor(frame_left,cv2.COLOR_GRAY2BGR)
                 for (x, y, w, h) in faces_rect:
                     cv2.rectangle(frame_left, (x, y), (x+w, y+h), (0, 255, 0), 2)
+                    cv2.putText(frame_left, "face",(x, y), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,255,0), 2)
 
+                
                 cv2.imshow('Face Detection', frame_left)
                 
             if cv2.waitKey(1) == ord('q'):
