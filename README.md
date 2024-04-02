@@ -35,3 +35,7 @@ This code employs the Haar cascade technique for face detection, utilizing an XM
 ## gen2-face-detection
 
 This example was taken from https://github.com/luxonis/depthai-experiments/tree/master/gen2-face-detection/
+
+## system_info
+
+The provided Python code operates by creating a pipeline using the DepthAI library, which facilitates working with depth and AI processing tasks on specialized hardware. The pipeline consists of two main components: a system logger and an output link. The system logger periodically collects various system information, including DDR and CMX memory usage, heap memory usage for the Leon CSS and MSS subsystems, chip temperature readings, and CPU usage for both Leon CSS and MSS. This information is then streamed through the output link named "sysinfo." Upon execution, the code connects to the DepthAI device, starts the pipeline, and continuously retrieves system information from the output queue. The retrieved data is then passed to the printSystemInformation() function, which formats and prints the system information to the console. This code essentially provides real-time monitoring of critical system parameters, offering insights into the device's resource utilization and temperature, which can aid in performance optimization and troubleshooting.
