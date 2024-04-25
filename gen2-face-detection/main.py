@@ -27,7 +27,8 @@ pipeline = dai.Pipeline()
 
 # Define a neural network that will detect faces
 detection_nn = pipeline.create(dai.node.NeuralNetwork)
-detection_nn.setBlobPath(blobconverter.from_zoo(name="face_detection_yunet_160x120", zoo_type="depthai", shaves=6))
+#detection_nn.setBlobPath(blobconverter.from_zoo(name="face_detection_yunet_160x120", zoo_type="depthai", shaves=6))
+detection_nn.setBlobPath(blobconverter.from_zoo(name="facemesh_192x192", zoo_type="depthai", shaves=6))
 detection_nn.input.setBlocking(False)
 
 # Define camera
