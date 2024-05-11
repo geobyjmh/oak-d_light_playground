@@ -77,6 +77,12 @@ with dai.Device(create_pipeline()) as device:
     tracklets_q = device.getOutputQueue("tracklets")
     pass_q = device.getOutputQueue("pass_out")
     sync=HostSync()
+    replacement_image = cv2.imread('C:\\Users\\julia\\OneDrive\\Projects2024\\github\\oak-d_light_playground\\my_fake\\image\\face01.jpg')
+    ix = 100
+    iy = 100
+    ifh = 100
+    ifw = 100
+
     while True:
         sync.add_msg("color", frame_q.get())
 
@@ -86,6 +92,8 @@ with dai.Device(create_pipeline()) as device:
         if nn_in is not None:
             seq = pass_q.get().getSequenceNum()
             msgs = sync.get_msgs(seq)
+
+            
 
             if not 'color' in msgs: continue
             frame = msgs["color"].getCvFrame()
@@ -104,19 +112,35 @@ with dai.Device(create_pipeline()) as device:
                 fh, fw, fc = face.shape
                 frame_h, frame_w, frame_c = frame.shape
 
+
+                x = bbox[0]
+                y = bbox[1]
+                print(x,y,fh,fw, ix, iy)
+                if(x > 1 and y > 1):
+                    ix = x
+                    iy = y
+                    ifw = fw
+                    ifh = fh
+                    
+
+                cv2.rectangle(frame, (ix, iy), (ix+ifw, iy+ifh), (0, 255, 0), 2)
+                resized_image = cv2.resize(replacement_image, (ifw, ifh))
+                frame[iy:iy+ifh, ix:ix+ifw] = resized_image
+
                 # Create blur mask around the face
-                mask = np.zeros((frame_h, frame_w), np.uint8)
-                polygon = cv2.ellipse2Poly((bbox[0] + int(fw /2), bbox[1] + int(fh/2)), (int(fw /2), int(fh/2)), 0,0,360,delta=1)
-                cv2.fillConvexPoly(mask, polygon, 255)
+                #mask = np.zeros((frame_h, frame_w), np.uint8)
+                #polygon = cv2.ellipse2Poly((bbox[0] + int(fw /2), bbox[1] + int(fh/2)), (int(fw /2), int(fh/2)), 0,0,360,delta=1)
+                #cv2.fillConvexPoly(mask, polygon, 255)
 
-                frame_copy = frame.copy()
-                frame_copy = cv2.blur(frame_copy, (80, 80))
-                face_extracted = cv2.bitwise_and(frame_copy, frame_copy, mask=mask)
-                background_mask = cv2.bitwise_not(mask)
-                background = cv2.bitwise_and(frame, frame, mask=background_mask)
+                #frame_copy = frame.copy()
+                #frame_copy = cv2.blur(frame_copy, (80, 80))
+                #face_extracted = cv2.bitwise_and(frame_copy, frame_copy, mask=mask)
+                #background_mask = cv2.bitwise_not(mask)
+                #background = cv2.bitwise_and(frame, frame, mask=background_mask)
                 # Blur the face
-                frame = cv2.add(background, face_extracted)
+                #frame = cv2.add(background, face_extracted)
 
+            
             cv2.imshow("Frame", cv2.resize(frame, (900,900)))
 
         if cv2.waitKey(1) == ord('q'):
