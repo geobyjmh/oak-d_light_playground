@@ -43,3 +43,11 @@ The provided Python code operates by creating a pipeline using the DepthAI libra
 ## edge_detection
 
 This Python code utilizes the DepthAI library to construct a processing pipeline for real-time edge detection from a color camera and a stereo camera setup. It first establishes nodes for cameras and edge detectors, then sets their properties such as resolution and filter kernels. The connections between nodes are defined, linking camera outputs to corresponding edge detector inputs. After connecting to the DepthAI device, the code enters a loop to continuously retrieve processed edge images and display them using OpenCV. Additionally, it allows interactive switching between different Sobel filter kernels by detecting user keystrokes, dynamically updating the edge detector configurations accordingly. This code provides a flexible and interactive framework for edge detection experimentation on DepthAI hardware.
+
+## gen2-blur-faces
+
+x
+
+## my_fake
+
+x
