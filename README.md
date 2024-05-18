@@ -46,8 +46,8 @@ This Python code utilizes the DepthAI library to construct a processing pipeline
 
 ## gen2-blur-faces
 
-x
+This code utilizes the DepthAI platform to perform real-time face detection and blurring in video streams. It sets up a pipeline with a color camera, a neural network for face detection, and an object tracker. The neural network is based on MobileNet and identifies faces in the camera feed with a confidence threshold. Detected faces are tracked, and a bounding box is created around each face. The bounding boxes are slightly expanded to ensure the entire face is covered. An elliptical mask is then applied to these regions, and a blurring effect is added using OpenCV. The result is a video stream where faces are blurred to protect privacy, while the rest of the frame remains unchanged. The processed video is displayed in real-time, and the application can be exited by pressing the 'q' key.
 
 ## my_fake
 
-x
+This code modifies a real-time face detection script using DepthAI to replace detected faces with a hand-drawn image instead of blurring them. The script sets up a DepthAI pipeline, integrating a color camera and a MobileNet-based neural network to detect faces. Detected faces are tracked, and their bounding boxes are slightly expanded to ensure they fully encompass the face. When a face is detected, its region in the video frame is replaced with a predefined hand-drawn image. This is achieved by resizing the replacement image to fit the bounding box of the detected face and overlaying it on the frame. The processed video, with the hand-drawn images replacing real faces, is displayed in real-time, and the application can be exited by pressing the 'q' key.
